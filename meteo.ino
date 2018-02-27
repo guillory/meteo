@@ -22,8 +22,8 @@ unsigned long lastTipTime = millis(); // TS of when the bucket tip has been dete
 // domoticz
 const char * domoticz_server = "192.168.2.8"; //Domoticz port
 int port = 8084;                          //Domoticz port
-const char* ssid     = "";    
-const char* password = "";
+const char* ssid     = "8barclayfree";    
+const char* password = "guigui49";
 int debug=1;
 double rssi ;
 int  rssi_dec;
@@ -31,7 +31,7 @@ unsigned int    POST_INTERVAL =10  * 60 * 1000;   //30 minutes
 unsigned long   previousMillisPOST =0;
 unsigned long   previousHour =0;
 unsigned long previousMillisTX20Data=0;
-unsigned int    RESTART_INTERVAL =30 * 1000;   // 30s reboot si TX répond pas
+unsigned int    RESTART_INTERVAL =5*60 * 1000;   // 5mn reboot si TX répond pas
 double moyennewind_speed;
 const int NB_SAMPLE = 300 ; // = POST_INTERVAL / (2* 1000) ; //  TX20 transmit data every two seconds 
 int  wind_speed_array[NB_SAMPLE];
@@ -143,11 +143,12 @@ if( (millis() - previousMillisTX20Data) >= RESTART_INTERVAL ) {
           }
           if (sa==4 && sb==se && sc==sf && sd==chk){      
            if (debug){   Serial.println(" :) OK :) OK :) OK :) OK");}
-           blink(200);
+             blink(100);blink(100);
              mesure++;
              wind_speed_array[mesure % NB_SAMPLE]=sc;
              wind_direction_count_array[sb]++;
            } else {
+          blink(1000);
            if (debug){   Serial.println(" !!! ERROR !!! ERROR !!!");}
           }
           
